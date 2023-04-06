@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abe362f0-bf5b-4b02-a110-f75f85bf52f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Salesforce/Read_write_Salesforce_Snw_ScalaSpark_Methods.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
