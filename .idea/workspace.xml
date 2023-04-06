@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abe362f0-bf5b-4b02-a110-f75f85bf52f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Scala-Spark/Read_write_Pg_Snw_Scalaspark_Methods.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Scala-Spark/Readin_and_Writing_Data_to_Snowflake_and_PosgreSQL.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Salesforce/Read_write_Salesforce_Snw_ScalaSpark_Methods.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +34,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/vadramandisang/Documents/Vadrama/data/ETL"
+    "last_opened_file_path": "/Users/vadramandisang/Documents/Vadrama/data/ETL/Salesforce"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Salesforce" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
