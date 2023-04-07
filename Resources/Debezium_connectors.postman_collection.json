@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "82938397-38ed-42f6-b6e5-d7bd485d35c6",
+		"name": "Debezium_connectors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test working Dbezium",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all connectors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8083/connectors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Connector",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"kaka_testing_tab1-connector\",\n  \"config\": {\n    \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",\n    \"database.hostname\": \"database_host\",\n    \"database.port\": \"5432\",\n    \"database.user\": \"database_user\",\n    \"database.password\": \"database_password\",\n    \"database.dbname\": \"database_name\",\n    \"plugin.name\": \"pgoutput\",\n    \"database.server.name\": \"source1\",\n    \"key.converter.schemas.enable\": \"false\",\n    \"value.converter.schemas.enable\": \"false\",\n    \"transforms\": \"unwrap\",\n    \"transforms.unwrap.type\": \"io.debezium.transforms.ExtractNewRecordState\",\n    \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\n    \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\n    \"table.include.list\": \"public.my_table\",\n    \"slot.name\": \"dbz_my_table_slot\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/connectors/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add RabbitMQ Connector",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"name\": \"kaka_rabbitmq-connector2\",\n\"config\":{\n    \"connector.class\": \"io.confluent.connect.rabbitmq.RabbitMQSourceConnector\",\n    \"kafka.topic\": \"rabbitmq_test\",\n    \"rabbitmq.queue\": \"test-queue-00\",\n    \"rabbitmq.username\": \"guest\",\n    \"rabbitmq.password\": \"guest\",\n    \"rabbitmq.host\": \"localhost\",\n    \"rabbitmq.port\": \"5672\",\n    \"rabbitmq.virtual.host\": \"/\",\n    \"confluent.license\": \"\",\n    \"confluent.topic.bootstrap.servers\": \"kafka:29092\",\n    \"confluent.topic.replication.factor\": 1,\n    \"value.converter\": \"org.apache.kafka.connect.converters.ByteArrayConverter\",\n    \"key.converter\": \"org.apache.kafka.connect.storage.StringConverter\"\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/connectors/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
