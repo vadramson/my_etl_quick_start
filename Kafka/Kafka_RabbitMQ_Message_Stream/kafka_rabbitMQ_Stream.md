@@ -1,6 +1,6 @@
 
 
-[`Image for this set up`](https://github.com/vadramson/my_etl_quick_start/blob/master/images/RabbitMQ_kafka_Streams.drawio.png)
+![`Image for this set up`](https://github.com/vadramson/my_etl_quick_start/blob/master/images/RabbitMQ_kafka_Streams.drawio.png)
 
 
 ## Setting up Kafka + RabbitMQ + Zookeeper for Data Streaming
