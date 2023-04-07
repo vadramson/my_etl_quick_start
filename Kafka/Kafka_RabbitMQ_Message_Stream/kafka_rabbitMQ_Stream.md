@@ -94,7 +94,7 @@ You should get the following output.
 	source  |  source-rabbitmq-00  |  RUNNING  |  RUNNING  |  io.confluent.connect.rabbitmq.RabbitMQSourceConnector
 
 
-An example Postman collection to illustrate the above can be found [`here`](url).
+An example Postman collection to illustrate the above can be found [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Resources/Debezium_connectors.postman_collection.json).
 
 
 Once a new connector is created, an associated kafka topic is also authomatically created. This topic can be subscribed(listened) to, get the messages being streamed and process them.
