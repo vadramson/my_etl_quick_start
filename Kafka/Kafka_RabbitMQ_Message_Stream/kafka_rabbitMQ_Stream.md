@@ -5,7 +5,7 @@
 
 ## Setting up Kafka + RabbitMQ + Zookeeper for Data Streaming
 
-To achieve the setup, follow the example mention [`here`](url) and use the docker-compose file located [`here`](url) instead.
+To achieve the setup, follow the example mention [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_Debezium_Stream_CDC/Kafka_Debezium_Zookeeper.md) and use the docker-compose file located [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_RabbitMQ_Message_Stream/docker-compose.yml) instead.
 
 There's no debezium needed in this example, instead we use `Kafka-connect`.
 
@@ -99,7 +99,7 @@ An example Postman collection to illustrate the above can be found [`here`](url)
 
 Once a new connector is created, an associated kafka topic is also authomatically created. This topic can be subscribed(listened) to, get the messages being streamed and process them.
 
-Using PyKafka, we can view our kafka topics [`here`](url) and consumers [`here`](url).
+Using PyKafka, we can view our kafka topics [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_RabbitMQ_Message_Stream/list_topics.ipynb) and consumers [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_RabbitMQ_Message_Stream/listen_to_database_changes.ipynb).
 
 
 The above setup should be able to get you up and running. For further info you can checkout this [`blog`](https://rmoff.net/2020/01/08/streaming-messages-from-rabbitmq-into-kafka-with-kafka-connect/)
