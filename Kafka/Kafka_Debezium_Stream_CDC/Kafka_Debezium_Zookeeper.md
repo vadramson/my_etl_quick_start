@@ -30,7 +30,7 @@ This should setup my_table for CDC.
 ## **2. Setup Kafka + Debezium + Zookeeper in a Docker container using docker-compose**
 
 
-Using the docker-compose file located [`here`](url). The file is self explanatory. 
+Using the docker-compose file located [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_Debezium_Stream_CDC/docker-compose.yml). The file is self explanatory. 
 
 Download the file into your target directory and from a command line tool, navigate to the directory. To build the container, enter the command below
 
@@ -92,7 +92,7 @@ An example Postman collection to illustrate the above can be found [`here`](url)
 
 Once a new connector is created, an associated kafka topic is also authomatically created. This topic can be subscribed(listened) to, get the messages being streamed and process them.
 
-Using PyKafka, we can view our kafka topics [`here`](url) and consumers [`here`](url).
+Using PyKafka, we can view our kafka topics [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_Debezium_Stream_CDC/list_topics.ipynb) and consumers [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Kafka/Kafka_Debezium_Stream_CDC/listen_to_database_changes.ipynb).
 	
 
 For furthe info and reference, chechout these videos
