@@ -87,7 +87,7 @@ Open a tool like Postman and:
 
    For more info about creatin Debezium connectors, go [`here`](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-connector-properties).
 
-An example Postman collection to illustrate the above can be found [`here`](https://github.com/vadramson/my_etl_quick_start/blob/master/Resources/Debezium_connectors.postman_collection.json).
+An example Postman collection to illustrate the above can be found [`here`](url).
 
 
 Once a new connector is created, an associated kafka topic is also authomatically created. This topic can be subscribed(listened) to, get the messages being streamed and process them.
