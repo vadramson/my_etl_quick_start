@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Documentation of Databricks ETL Jobs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e5a17401-fd99-4811-8d4b-d09633ba7768" class="page sans"><header><h1 class="page-title">Documentation of Databricks ETL Jobs</h1><p class="page-description"></p></header><div class="page-body"><p id="f9682c7d-f34a-4936-aa80-5909658112d9" class="">
+</p><h3 id="488fb2cf-85c7-4f8d-931e-6f01ce8e7e07" class=""><strong>Dependencies:</strong></h3><ul id="fcd086c4-d260-4aed-9e4b-bc0d6c3c0e8f" class="bulleted-list"><li style="list-style-type:disc"><code><strong>pyspark.sql</strong></code> - Spark SQL module for working with structured data.</li></ul><ul id="33009e05-701b-4e99-8f06-8be042a9acf6" class="bulleted-list"><li style="list-style-type:disc"><code><strong>simple_salesforce</strong></code> - A Python library for interacting with Salesforce APIs.</li></ul><ul id="9eb0d760-6f95-4a8b-ad4b-b7791e0a99ce" class="bulleted-list"><li style="list-style-type:disc"><code><strong>pyspark.sql.functions</strong></code> - Functions for working with Spark DataFrame columns.</li></ul><ul id="a25b0060-db60-472f-98a6-11ee4efe0ae1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>pyspark</strong></code> - The core Spark module.</li></ul><ul id="500a8a68-22ae-4ea6-9015-3b76dc00fab1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>pyspark.sql.types</strong></code> - Provides the data types available in Spark.</li></ul><ul id="721bb05c-1a1b-4cad-849e-b2394fbc6776" class="bulleted-list"><li style="list-style-type:disc"><code><strong>json</strong></code> - JSON encoder and decoder for Python.</li></ul><ul id="30803b8c-e52f-47f8-88a4-918c7d4fac42" class="bulleted-list"><li style="list-style-type:disc"><code><strong>snowflake.connector</strong></code> - Python connector for Snowflake.</li></ul><ul id="a9f2693f-e8b0-44b4-81a7-bce43173ff58" class="bulleted-list"><li style="list-style-type:disc"><code><strong>os</strong></code> - Provides a way of using operating system dependent functionality.</li></ul><ul id="b135ee01-4c22-4e01-9691-9fdd4592710b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>datetime</strong></code> - Supplies classes for working with dates and times.</li></ul><ul id="2d2402a8-d61f-4dfc-bf9b-9822174cffa6" class="bulleted-list"><li style="list-style-type:disc"><code><strong>hmac</strong></code> - Implements the HMAC algorithm as described in RFC 2104.</li></ul><ul id="5b85d833-6f8c-48f0-be81-3970101180d9" class="bulleted-list"><li style="list-style-type:disc"><code><strong>hashlib</strong></code> - Contains secure hash algorithms.</li></ul><ul id="5937066b-4e73-47f5-90c3-1db1da07de8a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>urllib.parse</strong></code> - Provides functions for parsing URLs.</li></ul><p id="67fc9262-3e2b-4306-949f-1dced3f2e052" class="">
+</p><ul id="041d1610-4e48-440b-80f3-74a50d403a14" class="block-color-gray_background toggle"><li><details open=""><summary><strong>Using Databricks Secrets</strong></summary><p id="91d8c63e-4773-4e5b-94ee-525636a6c7ce" class="">To set up secrets you:</p><ol type="1" id="0bc6e7cc-d7ce-4e1b-b80c-46504ef03631" class="numbered-list" start="1"><li><a href="https://docs.databricks.com/security/secrets/secret-scopes.html">Create a secret scope</a>. Secret scope names are case-insensitive.</li></ol><ol type="1" id="18527bcf-5e47-4e6b-8f14-7016967fb4d0" class="numbered-list" start="2"><li><a href="https://docs.databricks.com/security/secrets/secrets.html">Add secrets to the scope</a>. Secret names are case-insensitive.</li></ol><ol type="1" id="794e1ef6-ff1f-4e5f-8d85-ab6b0da818e3" class="numbered-list" start="3"><li>If you have the <a href="https://databricks.com/product/pricing/platform-addons">Premium plan or above</a>, <a href="https://docs.databricks.com/security/auth-authz/access-control/secret-acl.html">assign access control</a> to the secret scope.</li></ol><p id="1f0f86db-e8d8-4074-9fac-f61cca6c7e3b" class="">
+</p><p id="2f7d205d-39e2-41f2-a477-4a104eef84ee" class=""><strong>Concrete Example below →</strong></p><p id="af003e73-2cec-445f-aff7-9bd0d061129d" class="">
+</p><p id="74115fc5-1e1e-4f1a-aa35-2da5b944a9d2" class="">Installing and Initialising Databricks CLI</p><pre id="9cfd6f53-6870-41cf-b83b-ccda3a7eff62" class="code"><code>
+pip3 install databricks-cli
+databricks --version</code></pre><p id="a5aed830-ec3d-440f-959f-ab531dd4e8d3" class="">Create Databricks scope</p><pre id="716493e0-4db8-41e7-b3be-5af86d4cd1b0" class="code"><code>
+databricks secrets create-scope --scope my_scope</code></pre><p id="3dda4121-f9b5-4486-9674-72e34d02769b" class="">List all secret copes</p><pre id="c866b18e-6111-4c1a-a41f-666848faddf5" class="code"><code>
+databricks secrets list-scopes</code></pre><p id="6cb29a1d-165b-49fd-8646-e8f066892947" class="">
+</p><p id="9fadc52e-0c16-40fc-97cd-db7e2d84e564" class="">Adding secrets in existing scope</p><pre id="ac60b1dc-f200-48b8-814d-b2ed017d76d0" class="code"><code>
+databricks secrets put --scope my_scope --key some_key --string-value some_value</code></pre><p id="bfef8ad1-1d16-4132-840e-e0ae3baa06bc" class="">List secrets in a scope</p><pre id="188f5534-14d5-4afc-ad52-3c31c9cdaa95" class="code"><code>
+databricks secrets list --scope my_scope</code></pre></details></li></ul><ul id="82580e61-938d-4aad-83f9-6c3ca20f18d7" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>Main Migration Job</strong></mark></summary><p id="905f2822-8c3c-476f-9da5-0b4d291cf492" class="">This technical documentation provides an overview of the various functions of the jobs and their parameters. It aims to help understand the purpose and functionality of each function, making it easier to use and maintain the code.</p><h3 id="c669e33e-ed91-4cc3-bc41-8ec052e40e29" class=""><strong>Function: </strong><code><strong>anonymise(tab: str, pg_df: &#x27;DataFrame&#x27;) -&gt; &#x27;DataFrame&#x27;</strong></code></h3><p id="a115677f-693a-4d97-862c-d241307710fe" class="">This function is responsible for anonymizing sensitive data in the given DataFrame based on the specified table name.</p><ul id="f194a835-f665-4eb2-b91e-9fed1f2d98a2" class="bulleted-list"><li style="list-style-type:disc"><code><strong>tab</strong></code>: A string representing the table name to determine the anonymization logic.</li></ul><ul id="22235bd0-bd17-45d5-a5ed-8c0a7d082f6a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>pg_df</strong></code>: The input DataFrame containing the data to be anonymized.</li></ul><p id="24db71cb-bfad-4ed6-919e-276c787e8dfd" class="">The function applies different anonymization techniques based on the provided <code><strong>tab</strong></code> value. It modifies the DataFrame by adding new columns or replacing existing columns with anonymized values and returns the updated DataFrame.</p><p id="2bbae1d4-2ac4-4cec-943d-f11a4a2e9858" class="">
+</p><h3 id="7039ce5a-a8ad-430f-be31-ace2fd93071e" class=""><strong>Function: </strong><code><strong>read_src_pg_table(url: str, query: str, properties: dict) -&gt; &#x27;DataFrame&#x27;</strong></code></h3><p id="960ee6c9-f1fe-45b8-84cc-7b70f1e46ed6" class="">This function reads data from a PostgreSQL database table and returns a DataFrame.</p><ul id="5b7a9991-e724-4300-ac6e-b70df2e4bb96" class="bulleted-list"><li style="list-style-type:disc"><code><strong>url</strong></code>: The URL of the PostgreSQL database.</li></ul><ul id="b315f57e-7d30-46f0-a60f-665ab4354d47" class="bulleted-list"><li style="list-style-type:disc"><code><strong>query</strong></code>: The SQL query to select the data from the table.</li></ul><ul id="18e06c14-4b7b-4053-8fa6-ba888b269409" class="bulleted-list"><li style="list-style-type:disc"><code><strong>properties</strong></code>: A dictionary containing the connection properties.</li></ul><p id="36376d11-a212-4770-9e36-8ff2d3c52eaa" class="">The function establishes a connection to the PostgreSQL database, reads the specified table using the provided query and properties, and returns the data as a DataFrame.</p><p id="f7945792-a9dd-41fb-9176-6d67aff0cb5a" class="">
+</p><h3 id="19eefed8-e3af-4974-8da7-357b83c8353c" class=""><strong>Function: </strong><code><strong>read_tgt_snw_table(query: str, snow_options: dict) -&gt; &#x27;DataFrame&#x27;</strong></code></h3><p id="6ca48960-1e32-4e3c-bbd8-33a89a870679" class="">This function reads data from a Snowflake database table and returns a DataFrame.</p><ul id="8015004a-e283-449e-8e45-1228e6978ca1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>query</strong></code>: The SQL query to select the data from the table.</li></ul><ul id="6962b830-7766-49aa-8c03-0ff78fd8604b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>snow_options</strong></code>: A dictionary containing the Snowflake connection options.</li></ul><p id="b43ec91f-1449-4f14-88a6-18b7ec4e898d" class="">The function establishes a connection to the Snowflake database, reads the specified table using the provided query and options, and returns the data as a DataFrame.</p><p id="45a43465-5f1b-41a2-8e72-2f3672990562" class="">
+</p><h3 id="63c8c7ab-1c4d-4ded-8479-2a4dfdc5ca74" class=""><strong>Function: </strong><code><strong>get_all_tabs_to_migrate(url: str, get_all_tables_pg: str, pg_options: dict) -&gt; list</strong></code></h3><p id="e05d43a7-dcb2-4b75-938c-61d556f5c922" class="">This function retrieves all the database tables to migrate from a PostgreSQL database.</p><ul id="ec5c95f0-38c9-4ce7-bcdb-5ff6ef108cf0" class="bulleted-list"><li style="list-style-type:disc"><code><strong>url</strong></code>: The URL of the PostgreSQL database.</li></ul><ul id="2b0eaf47-6f16-48cf-8232-435277b74e0d" class="bulleted-list"><li style="list-style-type:disc"><code><strong>get_all_tables_pg</strong></code>: The SQL query to select all the tables from the database.</li></ul><ul id="2a60ccb6-af50-41df-bdd3-d74b00028950" class="bulleted-list"><li style="list-style-type:disc"><code><strong>pg_options</strong></code>: A dictionary containing the connection options.</li></ul><p id="8d306228-e7f1-40d6-b054-842733cb4065" class="">The function connects to the PostgreSQL database, executes the query to retrieve all table names, and returns a list of table names.</p><p id="fab03925-f553-4076-8520-8ae9cdd7f3a3" class="">
+</p><h3 id="22e4c231-471c-4474-86a0-6fe540fd082f" class=""><strong>Function: </strong><code><strong>check_schema_difference(table_to_check: str) -&gt; bool</strong></code></h3><p id="5c1d791c-add8-4bc7-aebd-e13173552576" class="">This function checks for schema differences between the source (Postgres) table and the target (Snowflake) table.</p><ul id="ce3f1773-500c-4592-b1df-cba5c9472bff" class="bulleted-list"><li style="list-style-type:disc"><code><strong>table_to_check</strong></code>: The name of the table to compare schemas.</li></ul><p id="68ae21d4-a598-4064-92ee-17f143f4a805" class="">The function retrieves the column metadata from the source and target tables, applies a data type mapping, and compares the schemas. If any differences are found, the function generates a string describing the differences and appends it to <code><strong>msg_to_send</strong></code> list. It returns a boolean value indicating whether there are schema differences or not.</p><p id="9b8f3a17-fbb6-4633-bbc1-b438fbd49ac7" class="">
+</p><h3 id="ea6b31d5-eef0-4ee2-b1df-f2e78235a7a4" class=""><strong>Function: </strong><code><strong>handle_schema_change(data_df: &#x27;DataFrame&#x27;, table_name: str, versioning_schema: str) -&gt; None</strong></code></h3><p id="2113a8c4-8ae5-4d9c-8f61-811a985b019e" class="">This function handles schema changes in the target (Snowflake) table.</p><ul id="d0340b9f-2f97-4dea-9cae-14d46dd700be" class="bulleted-list"><li style="list-style-type:disc"><code><strong>data_df</strong></code>: The DataFrame containing the updated data.</li></ul><ul id="d3aed363-1d74-4ace-ae94-bcce08133f66" class="bulleted-list"><li style="list-style-type:disc"><code><strong>table_name</strong></code>: The name of the target table.</li></ul><ul id="87545d36-3885-4a8d-a848-715d237fe206" class="bulleted-list"><li style="list-style-type:disc"><code><strong>versioning_schema</strong></code>: The schema name for versioning.</li></ul><p id="ad274980-348a-4c91-8c55-7b43032ba38a" class="">The function creates a new table with a timestamp in its name and saves the updated data. It then renames the old table and renames the new table to replace the old table. The function performs these operations within a transaction and handles any errors that occur.</p><p id="456b682c-4180-4a82-847c-0451cb4bb71e" class="">
+</p><p id="097b57a2-7bd8-448d-9d00-6fca6c379565" class="">
+</p><h3 id="0bad1b79-ce57-4a34-be94-27b41c32cdd0" class=""><strong>Function: </strong><code><strong>upsert_target_table(tab: str, merge_key: str = None) -&gt; bool</strong></code></h3><p id="96e88762-b761-4e5e-b178-ad2f581ae078" class="">This function performs an upsert (merge) operation on the target table.</p><ul id="ef92d8ac-0dd0-4df6-b029-095c7e27d90d" class="bulleted-list"><li style="list-style-type:disc"><code><strong>tab</strong></code>: The name of the target table.</li></ul><ul id="45dce5a7-e43e-4a04-b670-1e137a9becb8" class="bulleted-list"><li style="list-style-type:disc"><code><strong>merge_key</strong></code>: The column used as the merge key. Defaults to &#x27;id&#x27; if not specified.</li></ul><p id="7b8a0add-5434-44c1-9e6e-13a84170896e" class="">The function retrieves the column names of the target table and generates a MERGE query to perform the upsert operation. It executes the query using a Snowflake cursor and returns a boolean value indicating the success of the operation.</p><p id="1068488d-b094-4b25-94e8-996bb419ffc9" class="">
+</p><h3 id="e5ab0d57-2845-42dd-ae7c-8faba08e97cf" class=""><strong>Function: </strong><code><strong>load_tgt_snw_table(data_df: &#x27;DataFrame&#x27;, db_table: str, snow_options: dict, write_mode: str, update_flag: bool) -&gt; None</strong></code></h3><p id="10e051e0-84c9-426a-a229-3fc949b0d99d" class="">This function saves data to a Snowflake database table.</p><ul id="da44b213-10bd-4020-8feb-757b981b5996" class="bulleted-list"><li style="list-style-type:disc"><code><strong>data_df</strong></code>: The DataFrame containing the data to be saved.</li></ul><ul id="582b8d4e-90dc-4297-814b-e7e0757b3154" class="bulleted-list"><li style="list-style-type:disc"><code><strong>db_table</strong></code>: The name of the target database table.</li></ul><ul id="8084e01b-9479-4a7e-8504-4ca3771fee04" class="bulleted-list"><li style="list-style-type:disc"><code><strong>snow_options</strong></code>: A dictionary containing the Snowflake connection options.</li></ul><ul id="5ea01ff5-2a53-410e-aa68-0b3e94b6fee4" class="bulleted-list"><li style="list-style-type:disc"><code><strong>write_mode</strong></code>: The write mode to determine how the data is saved (&#x27;overwrite&#x27; or &#x27;append&#x27;).</li></ul><ul id="99ca598e-540f-4f7f-984e-eace65874e11" class="bulleted-list"><li style="list-style-type:disc"><code><strong>update_flag</strong></code>: A flag indicating whether the target table should be updated.</li></ul><p id="cf64b917-2c51-42e7-ba84-f98360c81cb9" class="">The function establishes a connection to the Snowflake database and saves the data to a temporary table or directly to the target table based on the update flag and write mode. If the update flag is set, it performs an UPSERT operation on the target table.</p><p id="c1bb1e1c-fe57-4128-8453-d9f5551b8e23" class="">
+</p><h3 id="63a999d4-3a64-4773-809b-4465b9e52e10" class=""><strong>Function: </strong><code><strong>send_mail(subject: str, message: str, link: str = None) -&gt; None</strong></code></h3><p id="46362727-7f2b-499a-8b8d-28a89aa58fba" class="">This function sends an email using the SMTP protocol.</p><ul id="e6bb470c-c1d9-478d-a830-7f742b4ed7d5" class="bulleted-list"><li style="list-style-type:disc"><code><strong>subject</strong></code>: The subject line of the email.</li></ul><ul id="c775b98f-7648-4e39-9e31-d1cf3ec8a4b9" class="bulleted-list"><li style="list-style-type:disc"><code><strong>message</strong></code>: The body content of the email.</li></ul><ul id="2071d213-2fc4-49f5-abfc-202b5fe6c296" class="bulleted-list"><li style="list-style-type:disc"><code><strong>link</strong></code>: An optional link to include in the email.</li></ul><p id="4ee70dae-daf4-4936-93cf-5c4e3a726cce" class="">The function uses the provided email credentials to authenticate and sends the email with the specified subject, message, and link (if provided).</p><p id="cd4a602b-e133-4848-b64e-a30d96139c86" class="">
+</p><h1 id="00ab88e6-84fc-4ace-9063-9638c59fb1d0" class="">Table Migration Process</h1><p id="00886595-3bce-4196-a8c6-d311a58413e0" class="">This code is designed to migrate tables from a source PostgreSQL database to a target Snowflake database. It follows a specific process to migrate the tables and handles various scenarios such as table existence checks, schema differences, and incremental data updates.</p><h3 id="a0e39b2a-7a4b-4035-b2db-a34dff7acf44" class=""><strong>Overview</strong></h3><p id="2bf4a6b8-b5f8-4853-9223-df8a8ee32c7e" class="">The migration process can be summarized as follows:</p><ol type="1" id="6228ce81-c343-4410-b724-4fa30559a2cb" class="numbered-list" start="1"><li>Check if the tables specified in the <code><strong>add_to_created_at</strong></code> list exist in the <code><strong>all_pg_tabs</strong></code> list, which contains all the source tables.</li></ol><ol type="1" id="12184993-2cbb-46af-b927-5e39f6c72cb9" class="numbered-list" start="2"><li>If a table exists in both lists, append it to the <code><strong>all_created_at</strong></code> list.</li></ol><ol type="1" id="f2c45d70-99bd-4f36-9e13-ec5ec428ce9f" class="numbered-list" start="3"><li>Iterate through each table in the <code><strong>all_created_at</strong></code> list and migrate them to the target Snowflake database.</li></ol><ol type="1" id="38808728-5c72-4208-a829-322d347f2b03" class="numbered-list" start="4"><li>During the migration, handle different scenarios based on table conditions, such as new tables, schema differences, and incremental data updates.</li></ol><h3 id="bba314c7-b168-4193-aa48-6c83cc2b6668" class=""><strong>Migration Steps</strong></h3><ol type="1" id="4bf8bfbd-ddc5-4390-b5a8-e423f2d4bc2a" class="numbered-list" start="1"><li><strong>Table Existence Check</strong><ul id="cacc1d00-1506-4fc1-9ecc-1d9fc94227ab" class="bulleted-list"><li style="list-style-type:disc">The code checks if the tables specified in the <code><strong>add_to_created_at</strong></code> list exist in the <code><strong>all_pg_tabs</strong></code> list using list comprehension and conditional check.</li></ul><ul id="a988c81f-0a0a-47cb-8c7e-2a3962698b19" class="bulleted-list"><li style="list-style-type:disc">Tables that exist in both lists are appended to the <code><strong>all_created_at</strong></code> list.</li></ul></li></ol><ol type="1" id="2472b021-6f52-4601-a22f-4407b2c008b5" class="numbered-list" start="2"><li><strong>Date Column Mapping</strong><ul id="1ce2ebfb-4e89-4ebc-a266-2135a194ea62" class="bulleted-list"><li style="list-style-type:disc">A dictionary named <code><strong>date_col</strong></code> is defined, which maps each table name to its corresponding date column.</li></ul><ul id="1a2c0b7f-8e63-4a24-8876-e76ab726d7e2" class="bulleted-list"><li style="list-style-type:disc">The date columns are used later for determining the maximum date value during incremental data updates.</li></ul></li></ol><ol type="1" id="097c190a-5b6e-42e5-bc90-3f7917062864" class="numbered-list" start="3"><li><strong>Table Migration Loop</strong><ul id="83099cbf-9522-43ee-afc9-6fdee2986257" class="bulleted-list"><li style="list-style-type:disc">Iterate through each table in the <code><strong>all_created_at</strong></code> list.</li></ul><ul id="b31aad8a-21c4-404b-874d-a5df2584ab1f" class="bulleted-list"><li style="list-style-type:disc">Print a message indicating the migration of the current table.</li></ul><ul id="96f48220-46d7-4347-96e5-d188d2366e67" class="bulleted-list"><li style="list-style-type:disc">Set the initial maximum column to <code><strong>&#x27;created_at&#x27;</strong></code>.</li></ul><ul id="6d3691be-805a-48dc-b7a8-2208b392e278" class="bulleted-list"><li style="list-style-type:disc">If the current table is also present in the <code><strong>add_to_created_at</strong></code> list, update the maximum column using the corresponding date column from the <code><strong>date_col</strong></code> dictionary.</li></ul></li></ol><ol type="1" id="46851125-7651-4101-b60f-78b4d9fad59d" class="numbered-list" start="4"><li><strong>Table Migration Process</strong><ul id="30df5298-9a85-4ae9-aedc-e592170b15e7" class="bulleted-list"><li style="list-style-type:disc">Check if the current table is not present in the <code><strong>all_snw_tabs</strong></code> list, which represents the already migrated tables in Snowflake.</li></ul><ul id="08867917-81d6-497d-b7cb-2d7fcbda94a1" class="bulleted-list"><li style="list-style-type:disc">If the table is not present, perform the following steps:<ul id="f8603c52-404c-4a1c-a729-5c50260aa8f7" class="bulleted-list"><li style="list-style-type:circle">Construct a PostgreSQL query to fetch the table data using the table name and maximum column.</li></ul><ul id="bd562322-e8c8-4b21-ba53-db1d40bfa3d2" class="bulleted-list"><li style="list-style-type:circle">Read the source PostgreSQL table using the <code><strong>read_src_pg_table</strong></code> method and cache the resulting DataFrame in memory.</li></ul><ul id="28efe5c2-e551-4876-9cf6-49b1fee3bdeb" class="bulleted-list"><li style="list-style-type:circle">If the DataFrame is empty (no rows), continue to the next table.</li></ul><ul id="0c7a329b-736b-4c87-8468-a4bfbd248abf" class="bulleted-list"><li style="list-style-type:circle">Load the DataFrame into the target Snowflake table using the <code><strong>load_tgt_snw_table</strong></code> method with the &quot;overwrite&quot; write mode.</li></ul><ul id="83e966d6-48ce-45f3-b76d-34cfee4d5391" class="bulleted-list"><li style="list-style-type:circle">Unpersist (remove from memory) the DataFrame.</li></ul><ul id="6a732b81-254a-4fdb-a8fa-3b2c352f003a" class="bulleted-list"><li style="list-style-type:circle">Append a migration success message for the current table to the <code><strong>msg_to_send</strong></code> list.</li></ul></li></ul></li></ol><ol type="1" id="8987f5e2-043a-4e30-ba4a-4139078c3598" class="numbered-list" start="5"><li><strong>Handling Schema Differences</strong><ul id="abf8c5ed-bf4e-41e6-96fa-699a450a2f81" class="bulleted-list"><li style="list-style-type:disc">If the current table is present in the <code><strong>all_snw_tabs</strong></code> list, indicating it has already been migrated, check for schema differences using the <code><strong>check_schema_difference</strong></code> method.</li></ul><ul id="bee5ce8c-3fc2-4072-bae9-0fb2eed833c4" class="bulleted-list"><li style="list-style-type:disc">If there are schema differences, perform the following steps:<ul id="e36542dc-ba3e-4889-acf2-4b044efa2469" class="bulleted-list"><li style="list-style-type:circle">Construct a PostgreSQL query to fetch the table data using the table name.</li></ul><ul id="4d94b34e-ee3f-4b31-9747-f1a143b4b4bf" class="bulleted-list"><li style="list-style-type:circle">Read the source PostgreSQL table using the <code><strong>read_src_pg_table</strong></code> method and cache the resulting DataFrame in memory.</li></ul><ul id="5d4c8725-c157-4304-be35-72bc87aecf79" class="bulleted-list"><li style="list-style-type:circle">If the DataFrame is empty (no rows), continue to the next table.</li></ul><ul id="451e043c-b021-4218-8835-36989747cc10" class="bulleted-list"><li style="list-style-type:circle">Handle the schema change using the <code><strong>handle_schema_change</strong></code> method, passing the DataFrame, table name, and a temporary schema name.</li></ul><ul id="d3ed621f-f7e5-4475-81f8-01e3f43c0c69" class="bulleted-list"><li style="list-style-type:circle">Unpersist the DataFrame.</li></ul></li></ul></li></ol><ol type="1" id="41051882-39f7-421f-b6eb-4a287b15e71a" class="numbered-list" start="6"><li><strong>Incremental Data Updates</strong><ul id="e9e073f7-f828-4403-a849-d4c551379dbd" class="bulleted-list"><li style="list-style-type:disc">If there are no schema differences, fetch the maximum date value for the current table from the source PostgreSQL database using a cursor.</li></ul><ul id="0ca2a61c-4941-4bcb-b54d-5dd2e646f3ab" class="bulleted-list"><li style="list-style-type:disc">If a maximum date value exists, construct an extension query based on the table name and inclusion/exclusion conditions.</li></ul><ul id="6b5ac372-5281-498c-af15-b57b495f2ea7" class="bulleted-list"><li style="list-style-type:disc">Read the source PostgreSQL table using the <code><strong>read_src_pg_table</strong></code> method, applying the maximum date filter and extension query, if applicable.</li></ul><ul id="6176ecf4-3dd5-4922-9e24-684335085274" class="bulleted-list"><li style="list-style-type:disc">Cache the resulting DataFrame in memory.</li></ul><ul id="af01fde0-3cab-454d-bfe5-b350c41a6b8d" class="bulleted-list"><li style="list-style-type:disc">Anonymize the data in the DataFrame using the <code><strong>anonymise</strong></code> method.</li></ul><ul id="c0700143-1908-49b1-8c9f-8d996f16a6a6" class="bulleted-list"><li style="list-style-type:disc">Load the DataFrame into the target Snowflake table using the <code><strong>load_tgt_snw_table</strong></code> method with the &quot;overwrite&quot; write mode and the &quot;update&quot; flag.</li></ul><ul id="f7dd9564-1c27-4af6-a205-107695cc4ff2" class="bulleted-list"><li style="list-style-type:disc">Unpersist the DataFrame.</li></ul></li></ol><ol type="1" id="fd7a1487-9c42-45f7-82ad-177fe4592cd7" class="numbered-list" start="7"><li><strong>Error Handling and Reporting</strong><ul id="08974f93-3f7e-4483-b41d-9017c90dd0d3" class="bulleted-list"><li style="list-style-type:disc">If a maximum date value is None, indicating no specific date to filter source rows, append an error message for the current table to the <code><strong>msg_to_send</strong></code> list.</li></ul><ul id="ef69b58b-cd4b-40ba-9478-7a9e1625964d" class="bulleted-list"><li style="list-style-type:disc">After processing all tables, print the total number of tables to migrate and the actual number of tables migrated.</li></ul><ul id="9f777008-733e-490b-840b-ad686bd14199" class="bulleted-list"><li style="list-style-type:disc">If the total and actual counts do not match, append an error message to the <code><strong>msg_to_send</strong></code> list.</li></ul></li></ol><ol type="1" id="f5e64e31-b51b-4549-b9ee-7b38fe11ed35" class="numbered-list" start="8"><li><strong>Message Notification</strong><ul id="1fd08296-d065-4254-903a-9db5dc5df329" class="bulleted-list"><li style="list-style-type:disc">At the end of the code, if there are any messages in the <code><strong>msg_to_send</strong></code> list, they can be sent as notifications.</li></ul></li></ol><h3 id="d9e695aa-091d-4ada-ac66-fc3bd4f36355" class=""><strong>Conclusion</strong></h3><p id="dcf38c8b-26ab-47ea-9e73-715b0ad3f31a" class="">This code provides a systematic approach to migrating tables from a source PostgreSQL database to a target Snowflake database. It handles table existence checks, schema differences, and incremental data updates based on date columns. The code also includes error handling and message notifications to report any issues encountered during the migration process.</p><p id="941bdac6-5cfc-430b-b30a-bb426ddf5777" class=""><strong></strong></p></details></li></ul><ul id="19abc8c7-44a5-46e4-948a-9a4bb193602d" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>Salesforce Migration Job</strong></mark></summary><h1 id="b36db4c4-63b3-441f-b448-d839f3ecae5d" class=""><strong>Technical Documentation: Code for Salesforce to Snowflake ETL</strong></h1><p id="cea84d9b-8655-4120-8472-c4665885bc57" class="">This technical documentation explains the code provided, which performs an ETL (Extract, Transform, Load) process from Salesforce to Snowflake using PySpark and the Simple Salesforce and Snowflake connectors.</p><p id="5148a969-0cb9-4f1f-9c90-32e6b11cabad" class="">
+</p><h3 id="3e6423d1-a76f-4ddd-ae75-bdb4fa3a6d0e" class=""><strong>Function: read_src_sf_table(table: str, query_extension: str = None) -&gt; &#x27;DataFrame&#x27;</strong></h3><p id="29bdc2d5-cfef-42e5-9b83-d17d77d3f46e" class=""><strong>Description</strong>: This function reads data from a Salesforce object (table) using the Salesforce Python library. It retrieves the object description, reads the schema, and queries the data using SOQL. It then extracts the rows from the retrieved records and converts the data to a PySpark DataFrame.</p><p id="5abc9762-7dca-43bd-926a-f7d6b2916f57" class=""><strong>Components</strong>:</p><ul id="1f3147db-690d-44ef-8872-8bea113f4164" class="bulleted-list"><li style="list-style-type:disc"><code><strong>table</strong></code> (str): The name of the Salesforce object (table) to read data from.</li></ul><ul id="f1042ebb-c6cb-4527-ab82-4cb328ec5656" class="bulleted-list"><li style="list-style-type:disc"><code><strong>query_extension</strong></code> (str, optional): An optional extension to the SOQL query. Default value is <code><strong>None</strong></code>.</li></ul><p id="655721fc-1112-4220-aca2-7beb170f8d51" class=""><strong>Returns</strong>: PySpark DataFrame containing the data read from the Salesforce object.</p><p id="95646cd5-d92b-48d1-86b2-8e5d3e8cfc56" class="">
+</p><h3 id="e8365ec3-92b7-4b1b-af2f-808c019de3d5" class=""><strong>Function: read_tgt_snw_table(query: str, snow_options: dict) -&gt; &#x27;DataFrame&#x27;</strong></h3><p id="ebc2f6c7-11d7-44fc-8441-79ff392eb022" class=""><strong>Description</strong>: This function reads data from a Snowflake database table using the Snowflake Spark connector. It takes a SQL query and Snowflake connection options as input and returns a PySpark DataFrame containing the queried data.</p><p id="2cc035b7-89cd-459a-9e06-b3e3d49a7ada" class=""><strong>Components</strong>:</p><ul id="5bee4915-ee7d-4fd0-98fa-f39b6ada3e2b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>query</strong></code> (str): The SQL query to retrieve data from the Snowflake table.</li></ul><ul id="8ff64b33-e936-49b3-b137-1a707d8e0f10" class="bulleted-list"><li style="list-style-type:disc"><code><strong>snow_options</strong></code> (dict): A dictionary containing the Snowflake connection options, including URL, user, password, database, schema, warehouse, and role.</li></ul><p id="951b8d95-4ffc-4f91-896e-09b9b9084dfc" class=""><strong>Returns</strong>: PySpark DataFrame containing the data read from the Snowflake table.</p><hr id="e8a42a43-63b6-4f2f-8556-4a40c92987bc"/><h3 id="488a6228-402a-44e1-a5fa-ddd336430093" class=""><strong>Function: get_all_tabs_to_migrate() -&gt; list</strong></h3><p id="258bc355-afff-41e0-89b3-c111973420ad" class=""><strong>Description</strong>: This function returns a list of all database tables to migrate. The list contains the names of the tables that are hard-coded within the function.</p><p id="7546b173-e239-43d4-a69a-43db8069d893" class=""><strong>Components</strong>: None</p><p id="8a9a8c59-49f2-4fd5-b1e0-54237de53cc3" class=""><strong>Returns</strong>: List of table names to migrate.</p><p id="0396f54f-ef32-46ce-bca7-641fc0773338" class="">
+</p><p id="6ca74139-f3bf-4c44-b0f1-8e4333cd9eaf" class="">
+</p><h3 id="2b6b405a-ca3a-4eb3-81c0-e9aa9e0b89dc" class=""><strong>Function: get_all_tgt_tabs_to_migrate(snow_options: dict) -&gt; list</strong></h3><p id="947ebf43-4f6c-4fec-b03b-6287b47b9137" class=""><strong>Description</strong>: This function retrieves all target database tables from the Snowflake database using the provided Snowflake connection options. It queries the Snowflake metadata tables to obtain the list of table names in the target database schema.</p><p id="6e211991-914e-44c8-a4c2-74fd05a21e73" class=""><strong>Components</strong>:</p><ul id="4ddc6b0b-c088-4022-adb3-10fba0b52cf1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>snow_options</strong></code> (dict): A dictionary containing the Snowflake connection options, including URL, user, password, database, schema, warehouse, and role.</li></ul><p id="22e1bcaa-4d5b-44bd-aedc-89e70494ac19" class=""><strong>Returns</strong>: List of target table names to migrate.</p><hr id="73b84674-cdf8-4b61-86b1-9f488def4780"/><h3 id="7b7f1cde-a7e2-4454-bb18-1e39244284ed" class=""><strong>Function: check_schema_difference(table_to_check: str) -&gt; bool</strong></h3><p id="150cdd2a-569e-4a73-860a-f51801e8a717" class=""><strong>Description</strong>: This function checks for schema differences between a source Salesforce table and a target Snowflake table. It reads the metadata of both tables, compares the column names, data types, and nullability, and detects any differences. If a schema difference is found, the function appends the details to a global list <code><strong>Schema_change_vals</strong></code>.</p><p id="d61bfaa1-e8ee-404d-bf54-fe8f03bdf931" class=""><strong>Components</strong>:</p><ul id="03163aa8-7a2c-4e64-87a9-d8b4cfcd4464" class="bulleted-list"><li style="list-style-type:disc"><code><strong>table_to_check</strong></code> (str): The name of the table to check for schema differences.</li></ul><p id="e384e4c8-fdbe-4096-8622-b0b5386ab095" class=""><strong>Returns</strong>: <code><strong>True</strong></code> if a schema difference is found, <code><strong>False</strong></code> otherwise.</p><p id="b3a56ee1-0253-48b4-be26-18bcee1d7b84" class="">
+</p><h3 id="33b29e76-2fb3-49f2-ad79-dc96846f0471" class=""><strong>Function: handle_schema_change(data_df: &#x27;DataFrame&#x27;, table_name: str, versioning_schema: str) -&gt; None</strong></h3><p id="93405540-7546-4254-b788-3c1e84153cb6" class=""><strong>Description</strong>: This function handles schema changes detected in the source Salesforce table. It creates a new table with a timestamped name to store the new data, renames the existing table to an alternate schema, and renames the new table to replace the existing table. The function performs these operations within a transaction to ensure data integrity.</p><p id="7d24f05b-7dc1-4a96-a03f-1f3e3e2ac9b7" class=""><strong>Components</strong>:</p><ul id="6ebebd98-2145-47a6-9545-9735c66b21dd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>data_df</strong></code> (&#x27;DataFrame): The DataFrame containing the new data.</li></ul><ul id="93f0535f-d8b2-428b-8721-3624e8d5d1c8" class="bulleted-list"><li style="list-style-type:disc"><code><strong>table_name</strong></code> (str): The name of the target table to handle schema changes for.</li></ul><ul id="d8b994f3-f532-4bf0-8d7e-5210e3a4dd26" class="bulleted-list"><li style="list-style-type:disc"><code><strong>versioning_schema</strong></code> (str): The name of the alternate schema to store the existing table.</li></ul><p id="75641225-08df-4607-81e4-30167d8f492a" class=""><strong>Returns</strong>: None</p><p id="6a4addfd-880e-4c9a-b678-f653c50c926f" class="">
+</p><h3 id="3b8ef103-3a24-472a-be2e-39d752898d3d" class=""><strong>Function: upsert_target_table(tab: str, merge_key: str = None) -&gt; None</strong></h3><p id="c237ebcc-1ec2-4277-b270-d8e78dce26c1" class=""><strong>Description</strong>: This function performs an upsert operation on the target Snowflake table. It takes the name of the target table and an optional merge key as input. The function uses the Snowflake Spark connector to write the data from the provided DataFrame to the target table. If a merge key is specified, the function performs an upsert operation based on that key. Otherwise, it performs a regular insert operation.</p><p id="430e6d46-aded-40a5-808d-1b44a721af6a" class=""><strong>Components</strong>:</p><ul id="04a9a1c6-b8df-491d-8715-2e3427680623" class="bulleted-list"><li style="list-style-type:disc"><code><strong>tab</strong></code> (str): The name of the target table to perform the upsert operation on.</li></ul><ul id="06a81c1c-e9d2-465a-9b7d-482d064ef0a0" class="bulleted-list"><li style="list-style-type:disc"><code><strong>merge_key</strong></code> (str, optional): An optional merge key to perform an upsert operation. Default value is <code><strong>None</strong></code>.</li></ul><p id="03aba0ae-1202-4a58-b56c-838ba4ab8495" class=""><strong>Returns</strong>: None</p><p id="5b58e8a4-1d5f-4114-b5e0-c6e053ba8a05" class="">
+</p><h1 id="f7407b87-e7df-46da-bfe0-b3b8169541ab" class=""><strong>Core Migration Method</strong></h1><p id="814b893c-a7e9-4897-8c63-a5e1bf5890e2" class="">This code segment represents the core migration method responsible for migrating tables from a source Salesforce database to a target Snowflake database. The code follows a specific process that handles various scenarios such as table existence checks, schema differences, and incremental data updates.</p><h2 id="e50330b5-188e-4856-b321-c3b80cf19ee7" class=""><strong>Overview</strong></h2><p id="d030dc13-eb50-4091-a442-addc6541fcf6" class="">The migration process can be summarized as follows:</p><ol type="1" id="e8cf1989-c869-4c95-ac8d-398be5b4039c" class="numbered-list" start="1"><li>Retrieve the list of Salesforce tables to migrate using the <code><strong>get_all_tabs_to_migrate()</strong></code> function and assign it to the <code><strong>salesforce_tables</strong></code> variable.</li></ol><ol type="1" id="a0bb96d7-adc8-4ef1-93d9-8ef5792eda63" class="numbered-list" start="2"><li>Retrieve the list of target Snowflake tables to migrate using the <code><strong>get_all_tgt_tabs_to_migrate()</strong></code> function, passing the <code><strong>snow_options</strong></code> dictionary, and assign it to the <code><strong>all_snw_tabs</strong></code> variable.</li></ol><ol type="1" id="f3968352-2204-431e-a35c-73438b588645" class="numbered-list" start="3"><li>Define a list of Salesforce tables to be excluded from the migration process and assign it to the <code><strong>deleted_salesforce_objects</strong></code> variable.</li></ol><ol type="1" id="55629a3c-8ed3-45ed-ad63-aa6ee8815c58" class="numbered-list" start="4"><li>Print the number of Salesforce tables to be migrated.</li></ol><ol type="1" id="91f9c1e9-eb2a-4130-a371-9a8c93f127f6" class="numbered-list" start="5"><li>Remove the tables specified in the <code><strong>deleted_salesforce_objects</strong></code> list from the <code><strong>all_snw_tabs</strong></code> list.</li></ol><ol type="1" id="43b2adcb-be80-4149-8496-0ce503c166a5" class="numbered-list" start="6"><li>Initialize an empty list called <code><strong>no_created_at</strong></code>.</li></ol><ol type="1" id="c2ee9e23-c458-49f1-8d06-48b2da93f31f" class="numbered-list" start="7"><li>Print the <code><strong>all_snw_tabs</strong></code> list, which represents the final list of Snowflake tables to migrate.</li></ol><h2 id="d9fe0ac3-2297-4b09-8d56-a60ba8bfaff9" class=""><strong>Table Migration Loop</strong></h2><p id="0f680fbe-1a27-4f2b-a255-da073b71b0d0" class="">The code then enters a loop that iterates over each table in the <code><strong>all_snw_tabs</strong></code> list. Within the loop:</p><ol type="1" id="8d321285-62af-4e6d-aeb0-ca902e240e36" class="numbered-list" start="1"><li>Set the Snowflake warehouse to be used for the migration process as <code><strong>&#x27;COMPUTE_WH&#x27;</strong></code>.</li></ol><ol type="1" id="07268dff-77a6-4ce4-ba57-b8075bb0a80e" class="numbered-list" start="2"><li>Print a message indicating the migration of the current table.</li></ol><ol type="1" id="b7025063-56c4-47ed-b9e6-d20eda9cfef0" class="numbered-list" start="3"><li>Set the initial maximum column name to <code><strong>&#x27;CreatedDate&#x27;</strong></code>.</li></ol><ol type="1" id="2baf3d21-6295-4728-8b65-72179648e581" class="numbered-list" start="4"><li>If the current table is <code><strong>&#x27;userrole&#x27;</strong></code>, update the maximum column name to <code><strong>&#x27;LASTMODIFIEDDATE&#x27;</strong></code>.</li></ol><h2 id="060f111b-c2de-4f45-a2bb-c6aa9e08ddef" class=""><strong>Table Migration Process</strong></h2><p id="2afe5795-f6dd-4a43-89c1-b3eda60b5043" class="">Within the table migration loop, the code performs the following steps:</p><ol type="1" id="143d49e1-af95-459f-a766-45efbceedfae" class="numbered-list" start="1"><li>Check if the current table is not present in the <code><strong>salesforce_tables</strong></code> list, indicating a new table that needs to be migrated.<ul id="f7781d5b-8076-4a77-8f20-aeab085ed844" class="bulleted-list"><li style="list-style-type:disc">If it is a new table, read the source Salesforce table using the <code><strong>read_src_sf_table()</strong></code> function, passing the table name, and cache the resulting DataFrame in memory.</li></ul><ul id="cceead64-3d90-4cff-a051-a2c60866c3ae" class="bulleted-list"><li style="list-style-type:disc">Set the Snowflake warehouse to be used for the migration process as <code><strong>&#x27;COMPUTE_WH&#x27;</strong></code>.</li></ul><ul id="aa5910dd-86be-4c9f-b68d-3e2f558a0a32" class="bulleted-list"><li style="list-style-type:disc">Load the DataFrame into the target Snowflake table using the <code><strong>load_tgt_snw_table()</strong></code> function with the options &quot;overwrite&quot;.</li></ul><ul id="e4a337ac-0087-4b4f-b6b6-4d1803439e06" class="bulleted-list"><li style="list-style-type:disc">Continue to the next table in the loop.</li></ul></li></ol><ol type="1" id="daa70b83-8cee-4895-80d3-5c860d95bcfc" class="numbered-list" start="2"><li>If the current table is present in the <code><strong>salesforce_tables</strong></code> list, indicating a table that has already been migrated, check for schema differences using the <code><strong>check_schema_difference()</strong></code> function.<ul id="cae21a6f-08ae-4735-974d-693b1315dac7" class="bulleted-list"><li style="list-style-type:disc">If there are schema differences, read the source Salesforce table using the <code><strong>read_src_sf_table()</strong></code> function, passing the table name, and cache the resulting DataFrame in memory.</li></ul><ul id="4ede195c-63af-4fa5-9c57-9f5df3439f7f" class="bulleted-list"><li style="list-style-type:disc">Handle the schema change using the <code><strong>handle_schema_change()</strong></code> function, passing the DataFrame, table name, and a temporary schema name.</li></ul></li></ol><ol type="1" id="681d928c-3292-474c-96fd-bd0d21fa69e9" class="numbered-list" start="3"><li>If there are no schema differences, proceed with incremental data updates.<ul id="93ec921c-c7c3-4997-b24c-521281b7f023" class="bulleted-list"><li style="list-style-type:disc">Fetch the maximum date value for the current table from the target Snowflake table using a cursor.</li></ul><ul id="852402ea-fe47-408c-b17b-7170cf55a84e" class="bulleted-list"><li style="list-style-type:disc">Convert the maximum date value to the format <code><strong>&#x27;YYYY-MM-DDTHH:MM:SSZ&#x27;</strong></code> to be used in the Salesforce query.</li></ul><ul id="a777f72e-a667-44fc-8aa1-493545967f7b" class="bulleted-list"><li style="list-style-type:disc">Construct a Salesforce query to retrieve records where the date column is greater than or equal to the maximum date value.</li></ul><ul id="7274c077-e65c-4591-b51c-8d3769c3da3a" class="bulleted-list"><li style="list-style-type:disc">Read the source Salesforce table using the <code><strong>read_src_sf_table()</strong></code> function, passing the table name and the Salesforce query.</li></ul><ul id="4ba4176a-8d7d-45e3-8251-cdab0fee709a" class="bulleted-list"><li style="list-style-type:disc">Cache the resulting DataFrame in memory.</li></ul><ul id="5f834981-d832-49ae-a8e9-67f704df794d" class="bulleted-list"><li style="list-style-type:disc">Load the DataFrame into the target Snowflake table using the <code><strong>load_tgt_snw_table()</strong></code> function with the options &quot;overwrite&quot; and &quot;update&quot;.</li></ul></li></ol><h2 id="9eee7d20-1a1f-4775-b22b-0dfc9945fbc3" class=""><strong>Error Handling and Reporting</strong></h2><p id="cf2acdb4-c710-4267-8e44-252d44f7ab28" class="">After processing all tables, the code performs error handling and reporting:</p><ul id="a40746d5-b827-47e6-9447-01f6d6305869" class="bulleted-list"><li style="list-style-type:disc">If a maximum date value is <code><strong>None</strong></code>, indicating no specific date to filter source rows, an error message for the current table is appended to the <code><strong>msg_to_send</strong></code> list.</li></ul><ul id="d74be82d-1bc5-46f5-867a-45474edc2ba8" class="bulleted-list"><li style="list-style-type:disc">Print the total number of tables to be migrated and the actual number of tables migrated.</li></ul><ul id="6cb93a5b-5b61-4bc1-b393-24d15a6388a7" class="bulleted-list"><li style="list-style-type:disc">If the total and actual counts do not match, an error message is appended to the <code><strong>msg_to_send</strong></code> list.</li></ul><h2 id="d62c7981-efb3-4116-9e3b-ce4626d42a56" class=""><strong>Message Notification</strong></h2><p id="dd7ec73a-a67d-41c6-8767-ff587406c6fc" class="">At the end of the code, if there are any messages in the <code><strong>msg_to_send</strong></code> list, they can be sent as notifications via email. The email subject is set as <code><strong>&#x27;Salesforce Leader Board - job from Databrick!&#x27;</strong></code>, and the email message includes the messages from the <code><strong>msg_to_send</strong></code> list concatenated together.</p><p id="971470af-145e-4ff3-8a15-72df56046354" class="">
+</p></details></li></ul><p id="475f9f9b-bc22-41ac-897d-b8fdf6e7fbaf" class="">
+</p></div></article></body></html>
